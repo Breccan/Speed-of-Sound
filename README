@@ -1,10 +1,15 @@
 
+
 Dependencies
 
 JMCVideo:
 http://www.mat.ucsb.edu/~a.forbes/PROCESSING/jmcvideo/jmcvideo.html
+- JMC video has additional javafx dependencies, read the page to make sure
+  you have appropriate files for you OS
 
 oscP5:
 http://www.sojamo.de/libraries/oscP5/
 
 
+At present OSC will read videos out of the data file that have the "vid_" 
+prefix. 
