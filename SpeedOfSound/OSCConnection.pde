@@ -116,7 +116,7 @@ class OSCConnection {
     }
     
     void sendCameraOn() {
-      if (cameras.length > 0) {
+      if (cameras != null) {
       OscMessage cOsc = new OscMessage("/Camera/On/x");
       float[] vec = new float[cameras.length];
       for (int i = 0; i < cameras.length; i++) {

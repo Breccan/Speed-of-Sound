@@ -175,7 +175,8 @@ void initCameras()
   println("Camera devices detected");
   println(devices);
   // Initialise cameras in cameraNames, but only if they were detected
-  if (cameraNames.length) {
+  println(cameraNames.length);
+  if (cameraNames.length > 0) {
     cameras = new CamBackgroundArtist[cameraNames.length];    
     for (int i = 0; i < cameraNames.length; i++) {
       cameras[i] = null;
@@ -240,8 +241,9 @@ void setup()
   titleArtist = new TitleBackgroundArtist(this);
   titleArtist.init(titles);
 
-  initCameras();
-  
+  if (cameraNames.length > 0) {
+    initCameras();
+  }
   // Initialise point artist
   pArtist = new PointArtist();
   pMotion = new PointMotion();
@@ -305,7 +307,7 @@ void draw()
   }
   
   if (!titleArtist.playing || titleArtist.isOverlay == 1) {
-    if (cameras.length > 0 ) {
+    if (cameras != null) {
       for (int i = 0; i < cameras.length; i++) {
         if (cameras[i] != null && cameras[i].active) cameras[i].paint();
       }
