@@ -116,6 +116,7 @@ class OSCConnection {
     }
     
     void sendCameraOn() {
+      if (cameras.length > 0) {
       OscMessage cOsc = new OscMessage("/Camera/On/x");
       float[] vec = new float[cameras.length];
       for (int i = 0; i < cameras.length; i++) {
@@ -127,6 +128,7 @@ class OSCConnection {
       }
       cOsc.add(vec);
       oscP5.send(cOsc, oscDestination);
+      }
     }
     
     void sendDemoMode() {

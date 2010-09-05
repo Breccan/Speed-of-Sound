@@ -96,7 +96,7 @@ String titles[][] = {
 // You should add those you want to use to this array.
 // List of camera devices to use.
 String[] cameraNames = new String[] {
-  "USB Video Class Camera" // MBP webcam
+  //"USB Video Class Camera" // MBP webcam
 };
 
 GL gl;
@@ -175,17 +175,21 @@ void initCameras()
   println("Camera devices detected");
   println(devices);
   // Initialise cameras in cameraNames, but only if they were detected
-  cameras = new CamBackgroundArtist[cameraNames.length];
-  for (int i = 0; i < cameraNames.length; i++) {
-    cameras[i] = null;
-    for (int j = 0; j < devices.length; j++) {
-	if (cameraNames[i] == devices[j]) {
-	    cameras[i] = new CamBackgroundArtist(this, cameraNames[i]);
-	    j = devices.length;
-	}
+  if (cameraNames.length) {
+    cameras = new CamBackgroundArtist[cameraNames.length];    
+    for (int i = 0; i < cameraNames.length; i++) {
+      cameras[i] = null;
+      for (int j = 0; j < devices.length; j++) {
+  	  if (cameraNames[i] == devices[j]) {
+	      cameras[i] = new CamBackgroundArtist(this, cameraNames[i]);
+	      j = devices.length;
+	  }
+      }
     }
+    
+    println("Cameras initialised");
+    
   }
-  println("Cameras initialised");
 }
 
 void setup()
@@ -202,7 +206,7 @@ void setup()
   //gl.glReadBuffer(GL_FRONT);
   //gl.glCopyPixels(0,0,1024,768,gl.GL_COLOR);
   GLCapabilities c = ((GLGraphics)g).getCapabilities();
-  println(c.toString());
+//  println(c.toString());
 
   if (gl.isExtensionAvailable("GL_ARB_shading_language_100"))
       println( "Found GLSL shader language");
@@ -301,8 +305,10 @@ void draw()
   }
   
   if (!titleArtist.playing || titleArtist.isOverlay == 1) {
-    for (int i = 0; i < cameras.length; i++) {
-      if (cameras[i] != null && cameras[i].active) cameras[i].paint();
+    if (cameras.length > 0 ) {
+      for (int i = 0; i < cameras.length; i++) {
+        if (cameras[i] != null && cameras[i].active) cameras[i].paint();
+      }
     }
   }
   

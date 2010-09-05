@@ -58,10 +58,10 @@ class TitleBackgroundArtist extends BackgroundArtist {
       movieRepository = new Movie[movieFiles.length][];
       for (int i = 0; i < movieFiles.length; i++) {
          movieRepository[i] = new Movie[2];
-         if (movieFiles[i][0] != null)
-           movieRepository[i][0] = new Movie(parent,"titles/" + movieFiles[i][0]);
-         if (movieFiles[i][1] != null)
-           movieRepository[i][1] = new Movie(parent,"titles/overlay/" + movieFiles[i][1]);
+        // if (movieFiles[i][0] != null)
+        //   movieRepository[i][0] = new Movie(parent,"titles/" + movieFiles[i][0]);
+        // if (movieFiles[i][1] != null)
+        //   movieRepository[i][1] = new Movie(parent,"titles/overlay/" + movieFiles[i][1]);
       }
       vidNum = changeTo = 0;
       isOverlay = 0;
@@ -191,6 +191,7 @@ class CamBackgroundArtist extends BackgroundArtist {
     }
     image(cam, 0, 0, width, height);
   }
+  
 }
 
 // Normally the below would go in a separate Factory class, but Processing makes
