@@ -13,3 +13,7 @@ http://www.sojamo.de/libraries/oscP5/
 
 At present OSC will read videos out of the data file that have the "vid_" 
 prefix. 
+
+Data and overlays can be kept in the relevant subfolders.
+
+More information at http://www.kellective.net/sound-visualisation

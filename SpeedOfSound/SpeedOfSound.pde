@@ -14,8 +14,11 @@ import java.nio.IntBuffer;
 
 import ddf.minim.*;
 import ddf.minim.analysis.*;
-
+import controlP5.*;
 import oscP5.*;
+
+public int sliderValue = 40;
+
 
 /*
 
@@ -106,6 +109,9 @@ AudioSource song;
 BeatDetect beat;
 BeatListener bl;
 OSCConnection osc;
+ControlP5 controlP5;
+ControlWindow controlWindow;
+
 
 // These things draw the scene... all of them can be beat responsive...
 
@@ -119,6 +125,7 @@ CamBackgroundArtist[] cameras;
 TitleBackgroundArtist titleArtist;
 
 boolean overlayOn = true;
+boolean toggleValue = true;
 
 // PointMotion is used to set the point locations, after it updates, it will
 // also update the lemur points via OSC (think the Simian mobile disco vid where
@@ -216,7 +223,7 @@ void setup()
   //frame.setResizable(true);
   //smooth();
   //colorMode(HSB);
-  
+
   minim = new Minim(this);
   osc = new OSCConnection(this,lemurIP,8000);
   song = minim.getLineIn(Minim.STEREO, 512);
@@ -265,6 +272,28 @@ void setup()
   osc.setAll(); // Set everything to its init point
   //cameras[0].active = true;
   println("Finished initialisation");
+  
+  
+ // My attempt to make another interface 
+ // controlP5.setAutoDraw(false);
+ // controlWindow.setBackground(color(40));
+  controlP5 = new ControlP5(this);
+  controlWindow = controlP5.addControlWindow("SOS Interface",100,100,400,200);
+  controlWindow.hideCoordinates();
+//  controlWindow.setTitle("SOS Interface");
+
+
+//(theName, theValue, X, Y, width, height)
+  Toggle myToggle = controlP5.addToggle("overlayValue",true,10,80,40,40);
+
+  //Textfield field = controlP5.addTextfield("Toggle Overlay Artist",10,20,100,20);
+  Slider mySlider = controlP5.addSlider("sliderValue1",0,255,40,40,100,10);
+  field.setWindow(controlWindow);
+  mySlider.setWindow(controlWindow);
+  myToggle.setWindow(controlWindow);
+  
+ 
+
 }
 
 void draw()
@@ -272,6 +301,9 @@ void draw()
   background(0);
   PGraphicsOpenGL pgl = (PGraphicsOpenGL) g;
   GL gl = pgl.gl;
+ 
+ // controlP5.draw();
+
 
   titleArtist.paint(); // Needs to do video changes in paint method
   if (!(titleArtist.playing)) {
