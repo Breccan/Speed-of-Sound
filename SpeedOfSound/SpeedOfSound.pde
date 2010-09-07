@@ -271,7 +271,7 @@ void setup()
   
   osc.setAll(); // Set everything to its init point
   //cameras[0].active = true;
-  println("Finished initialisation");
+  println("Finished initxialisation");
   
   
  // My attempt to make another interface 
@@ -282,13 +282,13 @@ void setup()
   controlWindow.hideCoordinates();
 //  controlWindow.setTitle("SOS Interface");
 
-
+//these dont do anything yet
 //(theName, theValue, X, Y, width, height)
   Toggle myToggle = controlP5.addToggle("overlayValue",true,10,80,40,40);
 
   //Textfield field = controlP5.addTextfield("Toggle Overlay Artist",10,20,100,20);
   Slider mySlider = controlP5.addSlider("sliderValue1",0,255,40,40,100,10);
-  field.setWindow(controlWindow);
+
   mySlider.setWindow(controlWindow);
   myToggle.setWindow(controlWindow);
   
