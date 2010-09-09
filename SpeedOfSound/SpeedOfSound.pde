@@ -275,26 +275,46 @@ void setup()
   
   
  // My attempt to make another interface 
- // controlP5.setAutoDraw(false);
- // controlWindow.setBackground(color(40));
   controlP5 = new ControlP5(this);
-  controlWindow = controlP5.addControlWindow("SOS Interface",100,100,400,200);
+  controlWindow = controlP5.addControlWindow("SOS Interface",100,100,200,400);
   controlWindow.hideCoordinates();
-//  controlWindow.setTitle("SOS Interface");
 
 //these dont do anything yet
 //(theName, theValue, X, Y, width, height)
-  Toggle myToggle = controlP5.addToggle("overlayValue",true,10,80,40,40);
+  Toggle overlayToggle = controlP5.addToggle("overlayToggle",true,10,80,40,40);
+  Toggle imagePointToggle = controlP5.addToggle("imagePointToggle",true,10,150,40,40);
+  Toggle rorschachToggle = controlP5.addToggle("rorschachToggle",true,10,220,40,40);
 
-  //Textfield field = controlP5.addTextfield("Toggle Overlay Artist",10,20,100,20);
-  Slider mySlider = controlP5.addSlider("sliderValue1",0,255,40,40,100,10);
+  Slider lemurPoints = controlP5.addSlider("lemurPoints",1,10,10,40,100,10);
 
-  mySlider.setWindow(controlWindow);
-  myToggle.setWindow(controlWindow);
-  
- 
+  lemurPoints.setWindow(controlWindow);
+  overlayToggle.setWindow(controlWindow);
+  imagePointToggle.setWindow(controlWindow);
+  rorschachToggle.setWindow(controlWindow);
 
 }
+
+void overlayToggle()
+{
+  println("blah");
+  if (pArtist.active){
+    pArtist.active = false;
+  } else {
+    pArtist.active = true;
+  }
+}
+
+void imagePointToggle()
+{
+  println("blah");
+  if (pArtist.rotateOn){
+    pArtist.rotateOn = false;
+  } else {
+    pArtist.rotateOn = true;
+  }
+  
+}
+
 
 void draw()
 {
@@ -579,4 +599,5 @@ void createLemurPoints (boolean booting) {
 void oscEvent(OscMessage theOscMessage) {
     osc.handleMessage(theOscMessage);
 }
+
 

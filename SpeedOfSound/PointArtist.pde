@@ -3,7 +3,7 @@ class PointArtist {
     int beatSize = 40;
     int minSize = 0;
     float fadeProportion = 0.95;
-    boolean active = false;
+    boolean active = true;
     boolean overlay = true;
     
     boolean imageOn = true;
