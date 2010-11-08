@@ -350,8 +350,12 @@ void draw()
 	gl.glDisable(GL.GL_BLEND); // Enable blending mode
       }
       if (pArtist.active && pArtist.overlay) {
-        pArtist.paint(pointSets[currentPreset]);
-      }
+        try{
+          pArtist.paint(pointSets[currentPreset]);
+        } catch(java.lang.ArrayIndexOutOfBoundsException e) {
+          System.out.println("Array error occured while moving slider");
+        }     
+       }
       /*if (!(pArtist.active && pArtist.overlay) &&
           !(rorschachLayer.active && rorshachLayer.overlay)) {
         background(255);
@@ -396,8 +400,12 @@ void draw()
   }
  
   if (pMotion != null) {
-    pMotion.move(pointSets[currentPreset]);
-    osc.sendPointsToOSC(pointSets[currentPreset]);  
+    try {
+      pMotion.move(pointSets[currentPreset]);
+      osc.sendPointsToOSC(pointSets[currentPreset]);
+    } catch(java.lang.ArrayIndexOutOfBoundsException error) {
+      System.out.println("currentPreset out of bounds");
+    }  
   }
   for (int i = 0; i < oArtists.length; i++) {
     oArtists[i].paint();
