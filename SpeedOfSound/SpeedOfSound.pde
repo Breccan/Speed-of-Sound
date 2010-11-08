@@ -17,7 +17,7 @@ import ddf.minim.analysis.*;
 import controlP5.*;
 import oscP5.*;
 
-public int sliderValue = 40;
+
 
 
 /*
@@ -143,6 +143,7 @@ int numPointSets = 14;
 int currentPreset = 0;
 LemurPoint[][] pointSets = new LemurPoint[numPointSets][];
 
+int sliderTicks1 = 30;
 // When demo mode is on, this automatically progresses to new backgrounds, presets, etc.
 boolean demoMode = false;
 // No changes to a particular parameter will be made until this time.
@@ -279,24 +280,40 @@ void setup()
   controlWindow = controlP5.addControlWindow("SOS Interface",100,100,200,400);
   controlWindow.hideCoordinates();
 
-//these dont do anything yet
 //(theName, theValue, X, Y, width, height)
   Toggle overlayToggle = controlP5.addToggle("overlayToggle",true,10,80,40,40);
   Toggle imagePointToggle = controlP5.addToggle("imagePointToggle",true,10,150,40,40);
   Toggle rorschachToggle = controlP5.addToggle("rorschachToggle",true,10,220,40,40);
+  
+  
+  //Imageoverlay
+  
 
-  Slider lemurPoints = controlP5.addSlider("lemurPoints",1,10,10,40,100,10);
+//  Slider setSize = controlP5.addSlider("setSize",1,10,10,40,100,10);
 
-  lemurPoints.setWindow(controlWindow);
+Slider numPoints = (Slider)controlP5.addSlider("numPoints",0,14,40,40,100,10);
+
+
+  numPoints.setWindow(controlWindow);
   overlayToggle.setWindow(controlWindow);
   imagePointToggle.setWindow(controlWindow);
   rorschachToggle.setWindow(controlWindow);
 
 }
 
+  
+ void numPoints (float valuePoints) {
+   
+        //if (!lp.active) return; // do nothing is not being used
+        numPointSets = (int) valuePoints;
+        println(numPointSets);
+        pointSets = new LemurPoint[numPointSets][];
+        createLemurPoints(false);
+ 
+ }
+
 void overlayToggle()
 {
-  println("blah");
   if (pArtist.active){
     pArtist.active = false;
   } else {
@@ -306,7 +323,6 @@ void overlayToggle()
 
 void imagePointToggle()
 {
-  println("blah");
   if (pArtist.rotateOn){
     pArtist.rotateOn = false;
   } else {
